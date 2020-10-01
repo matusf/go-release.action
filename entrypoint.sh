@@ -13,9 +13,9 @@ FILE_LIST=`/build.sh`
 
 EVENT_DATA=$(cat $GITHUB_EVENT_PATH)
 echo $EVENT_DATA | jq .
-UPLOAD_URL=$(echo $EVENT_DATA | jq -r .release.upload_url)
+UPLOAD_URL=$(echo $EVENT_DATA | jq -r .releases.upload_url)
 UPLOAD_URL=${UPLOAD_URL/\{?name,label\}/}
-RELEASE_NAME=$(echo $EVENT_DATA | jq -r .release.tag_name)
+RELEASE_NAME=$(echo $EVENT_DATA | jq -r .releases.tag_name)
 PROJECT_NAME=$(basename $GITHUB_REPOSITORY)
 NAME="${NAME:-${PROJECT_NAME}_${RELEASE_NAME}}_${GOOS}_${GOARCH}"
 
